@@ -5,6 +5,8 @@ import Header from "./components/Header/Header.jsx";
 import TabContent from "./TabContent.jsx";
 import { useState } from "react";
 
+import { EXAMPLES } from "./data.js";
+
 function CourseGoal(props) {
   return (
     <div className="course-goal">
@@ -23,12 +25,10 @@ function MyComponents({ priority }) {
 }
 
 function App() {
-  const [buttonContent, setButtonContent] = useState("Please select a button");
+  const [buttonContent, setButtonContent] = useState();
 
   function handleSelect(buttonId) {
-    setButtonContent(buttonId);
-    console.log(buttonId);
-    console.log(buttonContent + " selected");
+    setButtonContent(EXAMPLES[buttonId]);
   }
 
   return (
@@ -48,20 +48,51 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabContent onClickAction={() => handleSelect("Components")}>
+            <TabContent
+              isSelected={
+                buttonContent &&
+                buttonContent.title.toLowerCase() === "components"
+              }
+              onClickAction={() => handleSelect("components")}
+            >
               Component
             </TabContent>
-            <TabContent onClickAction={() => handleSelect("JSX")}>
+            <TabContent
+              isSelected={
+                buttonContent && buttonContent.title.toLowerCase() === "jsx"
+              }
+              onClickAction={() => handleSelect("jsx")}
+            >
               JSX
             </TabContent>
-            <TabContent onClickAction={() => handleSelect("Props")}>
+            <TabContent
+              isSelected={
+                buttonContent && buttonContent.title.toLowerCase() === "props"
+              }
+              onClickAction={() => handleSelect("props")}
+            >
               Props
             </TabContent>
-            <TabContent onClickAction={() => handleSelect("State")}>
+            <TabContent
+              isSelected={
+                buttonContent && buttonContent.title.toLowerCase() === "state"
+              }
+              onClickAction={() => handleSelect("state")}
+            >
               State
             </TabContent>
           </menu>
-          {buttonContent}
+          <div id="tab-content">
+            {!buttonContent ? (
+              "Please click a button"
+            ) : (
+              <span>
+                <h3>{buttonContent.title}</h3>
+                <p>{buttonContent.description}</p>
+                <code>{buttonContent.code}</code>
+              </span>
+            )}
+          </div>
         </section>
       </main>
     </div>
