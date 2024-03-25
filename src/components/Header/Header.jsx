@@ -2,14 +2,14 @@ import reactImg from "../../assets/react-core-concepts.png";
 
 import "./Header.css";
 
-function getRandomNumber(max) {
-  return Math.floor(Math.random() * (max + 1));
-}
-const reactDesc = ["Fundamental", "Crucial", "Core"];
-
-const currTab = reactDesc[getRandomNumber(2)];
-
 export default function Header() {
+  function getRandomNumber(max) {
+    return Math.floor(Math.random() * (max + 1));
+  }
+  const reactDesc = ["Fundamental", "Crucial", "Core"];
+
+  const currTab = reactDesc[getRandomNumber(2)];
+  
   return (
     <header>
       <img src={reactImg} alt="Stylized atom" />
